@@ -28,7 +28,7 @@ const AppointmentsForm = ({ doctor, onClose, onBookNow }) => {
     });
 
     // Store appointment data in localStorage
-    const appointmentData = {
+    const appointmentsData = {
       doctorNameAppt: doctor.name,
       doctorSpecialityAppt: doctor.speciality,
       userNameAppt: formData.userNameAppt,
@@ -37,7 +37,7 @@ const AppointmentsForm = ({ doctor, onClose, onBookNow }) => {
       timeSlotAppt: formData.timeSlotAppt
     };
 
-    localStorage.setItem('appointmentData', JSON.stringify(appointmentData));
+    localStorage.setItem('appointmentsData', JSON.stringify(appointmentsData));
 
     // Reset form fields after submission if needed
     setFormData({
