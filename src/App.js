@@ -1,32 +1,35 @@
-import './App.css';
-// Import necessary modules from React library
-import React, { useEffect } from 'react';
-
-// Import components for routing from react-router-dom library
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
-import Landing_Page from './Components/Landing_Page/LandingPage';
-import Sign_Up from './Components/Sign_Up/Sign_Up';
+import LandingPage from './Components/Landing_Page/Landing_Page';
+import SignUp from './Components/Sign_Up/Sign_Up';
 import Login from './Components/Login/Login';
+import InstantConsultation from './Components/InstantConsultation/InstantConsultation';
+import AppointmentsPage from './Components/AppointmentsPage/AppointmentsPage';
+import Notification from './Components/Notification/Notification';
+import ReviewForm from './Components/ReviewForm/ReviewForm';
+import ReportsLayout from './Components/ReportsLayout/ReportsLayout'; // Updated path for ReportsPage
+import ProfileCard from './Components/ProfileCard/ProfileCard';
 
-// Function component for the main App
 function App() {
-
-  // Render the main App component
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Landing_Page />} />
-          <Route path="/Sign_Up" element={<Sign_Up />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/instantconsultation" element={<InstantConsultation />} />
+          <Route path="/searchdoctors" element={<AppointmentsPage />} />
+          <Route path="/reviews" element={<ReviewForm />} />
+          <Route path="/notification" element={<Notification />} />
+          <Route path="/reports" element={<ReportsLayout />} />
+          <Route path="/profile" element={<ProfileCard />} /> {/* Ensure this route exists */}
         </Routes>
       </BrowserRouter>
     </div>
   );
 }
 
-// Export the App component as the default export
 export default App;

@@ -1,0 +1,40 @@
+/* src/Components/ReportsLayout/ReportsLayout.css */
+
+.reports-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure it takes up the full viewport height */
+  padding: 20px;
+}
+
+.reports-table {
+  width: 80%; /* Adjust as needed */
+  border-collapse: collapse;
+}
+
+.reports-table th, .reports-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.reports-table th {
+  background-color: #f2f2f2; /* Gray background for header */
+  font-weight: bold; /* Bold text for header */
+}
+
+.reports-table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternating row color */
+}
+
+.report-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+}

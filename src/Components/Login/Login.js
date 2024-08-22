@@ -68,7 +68,7 @@ const Login = () => {
           <div className="login-text">
             Are you a new member? 
             <span>
-              <Link to="/Sign_Up" style={{ color: '#2190FF' }}>
+              <Link to="/signup" style={{ color: '#2190FF' }}>
                 Sign Up Here
               </Link>
             </span>
@@ -106,9 +106,8 @@ const Login = () => {
              </div>
               <div className="btn-group">
                 {/* Login button */}
-                <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">
-                  Login
-                </button>
+                <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Login</button>
+                <button type="reset" className="btn btn-danger mb-2 waves-effect waves-light">Reset</button>
               </div>
             </form>
           </div>

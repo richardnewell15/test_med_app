@@ -1,0 +1,24 @@
+.notification-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.appointment-card {
+  background-color: #007bff; /* Add background color to appointment-card */
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+}
+
+.appointment-card__title {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.appointment-card__message {
+  margin-bottom: 8px;
+}

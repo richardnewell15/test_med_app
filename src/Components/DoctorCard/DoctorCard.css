@@ -1,0 +1,78 @@
+/* Container for the entire doctor card */
+.doctor-card-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #fff;  /* Default background color for the whole container */
+}
+
+/* Container for the profile image and details */
+.doctor-card-details-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Container for the profile image */
+.doctor-card-profile-image-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    margin-left: 20px;
+    background-color: #fff;  /* Purple background for the image part */
+    border: 2px solid #333;  /* Thicker border with 4px width */
+  }
+
+
+/* Container for the details */
+.doctor-card-details {
+  flex: 1 1 75px;
+  flex-direction: column;
+  background-color: #fff;  /* White background for the details part */
+}
+
+/* Individual detail styles */
+.doctor-card-detail-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.doctor-card-detail-speciality {
+  font-size: 14px;
+  color: #777;
+}
+
+.doctor-card-detail-experience {
+  font-size: 14px;
+  color: #777;
+}
+
+.doctor-card-detail-ratings {
+  font-size: 14px;
+  color: #777;
+  padding-bottom: 20px;
+}
+
+.book-now-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.book-now-button:hover {
+  background-color: #0056b3;
+}

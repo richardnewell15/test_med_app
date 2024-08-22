@@ -1,0 +1,41 @@
+/* ReviewForm.css */
+
+.review-form {
+  width: 80%;
+  margin: 120px auto;
+  font-family: Arial, sans-serif;
+}
+
+.review-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.review-table th, .review-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.review-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.review-table td button {
+  padding: 8px 12px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.review-table td button:hover {
+  background-color: #0d8bf2;
+}
+
+.review-table td .feedback-submitted {
+  color: #4CAF50;
+  font-weight: bold;
+}

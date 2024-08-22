@@ -1,0 +1,30 @@
+/* src/Components/ProfileCard/ProfileCard.css */
+
+.profile-popup {
+  /* Your existing styles for the popup */
+}
+
+.profile-navigation {
+  /* Add styles for positioning or spacing if needed */
+}
+
+.profile-link {
+  color: #2190FF; /* Link color */
+  text-decoration: none; /* Remove underline */
+  font-size: 16px; /* Adjust font size */
+  margin: 10px 0; /* Adjust spacing between links */
+  display: block; /* Ensure each link is on a new line */
+  cursor: pointer; /* Show pointer cursor on hover */
+}
+
+.profile-link:hover {
+  text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+.profile-section {
+  /* Your existing styles for the profile section */
+}
+
+.profile-details {
+  /* Your existing styles for the profile details */
+}
