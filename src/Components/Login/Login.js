@@ -1,8 +1,7 @@
-
 // Following code has been commented with appropriate comments for your reference.
 import React, { useState, useEffect } from 'react';
 // Apply CSS according to your design theme or the CSS provided in week 2 lab 2
-import './Login.css';
+
 import { Link, useNavigate } from 'react-router-dom';
 import { API_URL } from '../../config';
 
@@ -26,7 +25,7 @@ const Login = () => {
   const login = async (e) => {
     e.preventDefault();
     // Send a POST request to the login API endpoint
-    const res = await fetch(`${API_URL}/api/auth/Login`, {
+    const res = await fetch(`${API_URL}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,22 +59,39 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <div className="login-grid">
-        <div className="login-text">
-          <h2>Login</h2>
-        </div>
-        <div className="login-text">
-          Are you a new member? <span><a href="../Sign_Up/Sign_Up.html" style={{ color: '#2190FF' }}>Sign Up Here</a></span>
-        </div>
-        <br />
-        <div className="login-form">
-          <form>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input type="email" name="email" id="email" className="form-control" placeholder="Enter your email" aria-describedby="helpId" required />
-            </div>
-            <div className="form-group">
+    <div>
+      <div className="container">
+        <div className="login-grid">
+          <div className="login-text">
+            <h2>Login</h2>
+          </div>
+          <div className="login-text">
+            Are you a new member? 
+            <span>
+              <Link to="/Sign_Up" style={{ color: '#2190FF' }}>
+                Sign Up Here
+              </Link>
+            </span>
+          </div>
+          <br />
+          <div className="login-form">
+            <form onSubmit={login}>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                {/* Input field for email */}
+                <input 
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)} 
+                  type="email" 
+                  name="email" 
+                  id="email" 
+                  className="form-control" 
+                  placeholder="Enter your email" 
+                  aria-describedby="helpId" 
+                />
+              </div>
+              {/* Input field for password */}
+              <div className="form-group">
                <label htmlFor="password">Password</label>
                <input
                  value={password}
@@ -88,18 +104,18 @@ const Login = () => {
                  aria-describedby="helpId"
                />
              </div>
-            <div className="btn-group">
-              <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">Login</button>
-            </div>
-            <br />
-            <div className="login-text">
-              Forgot Password?
-            </div>
-          </form>
+              <div className="btn-group">
+                {/* Login button */}
+                <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-);
+  )
 }
 
 export default Login;
