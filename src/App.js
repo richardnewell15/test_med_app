@@ -16,6 +16,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Navbar />
+        <Notification>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/signup" element={<SignUp />} />
@@ -23,10 +24,10 @@ function App() {
           <Route path="/instant-consultation" element={<InstantConsultation />} />
           <Route path="/searchdoctors" element={<AppointmentsPage />} />
           <Route path="/reviews" element={<ReviewForm />} />
-          <Route path="/notification" element={<Notification />} />
-          <Route path="/reports" element={<ReportsLayout />} />
+          <Route path="/report" element={<ReportsLayout />} />
           <Route path="/profile" element={<ProfileCard />} /> {/* Ensure this route exists */}
         </Routes>
+        </Notification>
       </BrowserRouter>
     </div>
   );

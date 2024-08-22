@@ -1,80 +1,74 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import './ReportsLayout.css';
+import { useNavigate } from 'react-router-dom';
+import ReportDocument from './ReportDocument.pdf'
 
 const ReportsLayout = () => {
-    const [reports, setReports] = useState([
-        { id: 1, doctorName: 'Dr. John Doe', doctorSpeciality: 'Cardiologist', report: '/Report.pdf', download: '/Report.pdf', reviewGiven: false },
-        { id: 2, doctorName: 'Dr. Jane Smith', doctorSpeciality: 'Dermatologist', report: '/Report.pdf', download: '/Report.pdf', reviewGiven: false },
-        { id: 3, doctorName: 'Dr. Mike Johnson', doctorSpeciality: 'Pediatrician', report: '/Report.pdf', download: '/Report.pdf', reviewGiven: false }
-    ]);
+    const navigate = useNavigate();
 
-    const [showReport, setShowReport] = useState(false);
-    const [selectedDoctor, setSelectedDoctor] = useState(null);
-
-    const openReport = (id) => {
-        const doctor = reports.find(report => report.id === id);
-        if (doctor) {
-            // Open the PDF in a new window
-            window.open(doctor.report, '_blank');
+    useEffect(() => {
+        const authtoken = sessionStorage.getItem("auth-token");
+        if (!authtoken) {
+            navigate("/login");
         }
-    };
+    }, [navigate]);
 
-    const closeReport = () => {
-        setShowReport(false);
-        setSelectedDoctor(null);
-    };
+    // Sample report data 
+    const reportData = [
+        {
+            serialNumber: 1,
+            doctorName: 'Dr. Ramesh',
+            doctorSpeciality: 'Cardiology',
+            reportUrl: process.env.PUBLIC_URL + '/patient_report_1.pdf' // Example URL for report 1
+        },
+        {
+            serialNumber: 2,
+            doctorName: 'Dr. Harini',
+            doctorSpeciality: 'Dermatology',
+            reportUrl: process.env.PUBLIC_URL + '/patient_report_2.pdf' // Example URL for report 2
+        },
+        // Add more report data objects as needed 
+    ];
 
-    const handleReportSubmit = (feedback, rating) => {
-        const updatedReports = reports.map(report => {
-            if (report.id === selectedDoctor.id) {
-                return { ...report, reviewGiven: true };
-            }
-            return report;
-        });
-        setReports(updatedReports);
-        closeReport();
+    // Function to handle report download
+    const handleDownload = (url) => {
+        window.open(url, '_blank');
     };
 
     return (
-        <div className="reports-layout">
-            <h1>Your Reports</h1>
-            <table className="reports-table">
+        <div className="reports-container">
+            <h1>Reports</h1>
+            <table className="report-table">
                 <thead>
                     <tr>
-                        <th>Serial Number</th>
+                        <th>S.No.</th>
                         <th>Doctor Name</th>
                         <th>Doctor Specialty</th>
                         <th>View Report</th>
                         <th>Download Report</th>
                     </tr>
                 </thead>
+
                 <tbody>
-                    {reports.map((report, index) => (
-                        <tr key={report.id}>
-                            <td>{index + 1}</td>
+                    {reportData.map((report, index) => (
+                        <tr key={report.serialNumber}>
+                            <td>{report.serialNumber}</td>
                             <td>{report.doctorName}</td>
                             <td>{report.doctorSpeciality}</td>
                             <td>
-                                <button onClick={() => openReport(report.id)}>View Report</button>
+                                <button onClick={() => window.open(report.reportUrl, '_blank')} className="report-link">
+                                    View Report
+                                </button>
                             </td>
                             <td>
-                                <a href={report.download} download={`Report_${report.id}.pdf`}>
-                                    <button>Download</button>
-                                </a>
+                               <a href={ReportDocument} download target="_blank" rel="noopener noreferrer">
+                          <button className='download-report'>Download Report</button>
+                        </a>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-
-            {showReport && selectedDoctor && (
-                <div className="report-popup">
-                    <div>
-                        <h2>{selectedDoctor.doctorName}</h2>
-                        <button onClick={closeReport}>Close</button>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };

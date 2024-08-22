@@ -1,30 +1,61 @@
-/* src/Components/ProfileCard/ProfileCard.css */
+.profile-container {
+    max-width: 400px;
+    margin: 15% auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+  }
+  
+  .profile-container h1 {
+    margin-top: 0;
+  }
 
-.profile-popup {
-  /* Your existing styles for the popup */
-}
+  .profile-container form {
+    margin-bottom: 20px;
+  }
 
-.profile-navigation {
-  /* Add styles for positioning or spacing if needed */
-}
+  .profile-container label {
+    display: block;
+    margin-bottom: 10px;
+  }
 
-.profile-link {
-  color: #2190FF; /* Link color */
-  text-decoration: none; /* Remove underline */
-  font-size: 16px; /* Adjust font size */
-  margin: 10px 0; /* Adjust spacing between links */
-  display: block; /* Ensure each link is on a new line */
-  cursor: pointer; /* Show pointer cursor on hover */
-}
+  .profile-container input[type="text"],
+  .profile-container input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
 
-.profile-link:hover {
-  text-decoration: underline; /* Optional: Add underline on hover */
-}
+  .profile-container button {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background-color: #2190ff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .profile-details {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 20px;
+  }
 
-.profile-section {
-  /* Your existing styles for the profile section */
-}
+  .profile-details h2 {
+    margin-top: 0;
+  }
 
-.profile-details {
-  /* Your existing styles for the profile details */
-}
+  .profile-details p {
+    margin-bottom: 10px;
+  }
+
+  .profile-details button {
+    background-color: #2190ff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }

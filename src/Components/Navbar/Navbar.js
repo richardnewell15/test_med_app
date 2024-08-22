@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
-import ProfileCard from "../ProfileCard/ProfileCard"; // Import ProfileCard
+import ProfileCard from "../ProfileCard/ProfileCard";
 
 const Navbar = () => {
     const [click, setClick] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-    const [showProfileCard, setShowProfileCard] = useState(false); // State for ProfileCard visibility
-    const navigate = useNavigate();
 
     const handleClick = () => setClick(!click);
 
@@ -20,6 +18,7 @@ const Navbar = () => {
         sessionStorage.removeItem("phone");
         localStorage.removeItem("doctorData");
         setIsLoggedIn(false);
+
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
             if (key.startsWith("reviewFormData_")) {
@@ -27,28 +26,25 @@ const Navbar = () => {
             }
         }
         setEmail('');
-        navigate("/");
         window.location.reload();
-    }
-
-    const handleProfileIconClick = () => {
-        setShowProfileCard(!showProfileCard);
     }
 
     useEffect(() => {
         const storedEmail = sessionStorage.getItem("email");
+
         if (storedEmail) {
             setIsLoggedIn(true);
             setEmail(storedEmail);
-            const name = storedEmail.split('@')[0];
-            setUsername(name);
+            setUsername(storedEmail.split('@')[0]);
         }
     }, []);
 
     return (
         <nav>
             <div className="nav__logo">
-                <Link to="/">StayHealthy <i style={{color:'#2190FF'}} className="fa fa-user-md"></i></Link>
+                <Link to="/">
+                    StayHealthy <i style={{color:'#2190FF'}} className="fa fa-user-md"></i>
+                </Link>
                 <span>.</span>
             </div>
             <div className="nav__icon" onClick={handleClick}>
@@ -71,23 +67,19 @@ const Navbar = () => {
                     <Link to="/instant-consultation">Instant Consultation</Link>
                 </li>
                 {isLoggedIn ? (
-                    <div className="profile-container">
-                        <li className="link" onClick={handleProfileIconClick}>
-                            <i className="fa fa-user-circle"></i>
-                        </li>
-                        <li className="link" onClick={handleProfileIconClick}>
-                            <span className="username">{"Welcome, " + username}</span>
+                    <>
+                        <li className="link welcome-user">
+                            <span>Welcome, {username}</span>
+                            <ul className="dropdown-menu">
+                                {/*<ProfileCard/>*/}
+                                <li><Link to="/profile">Profile</Link></li>
+                                <li><Link to="/report">Report</Link></li>
+                            </ul>
                         </li>
                         <li className="link">
-                            <button className="btn2" onClick={handleLogout}>Logout</button>
+                            <button onClick={handleLogout} className="btn2">Logout</button>
                         </li>
-                        {showProfileCard && (
-                            <ProfileCard
-                                isOpen={showProfileCard}
-                                onClose={() => setShowProfileCard(false)}
-                            />
-                        )}
-                    </div>
+                    </>
                 ) : (
                     <>
                         <li className="link">

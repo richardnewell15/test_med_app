@@ -1,102 +1,111 @@
 import React, { useState } from 'react';
-import './ReviewForm.css'; // Import CSS file for styling
-import FeedbackForm from '../FeedbackForm/FeedbackForm'; // Import FeedbackForm component
+import GiveReviews from './GiveReviews';
+import Popup from 'reactjs-popup';
+import { useNavigate } from 'react-router-dom';
+import "./ReviewForm.css"
 
 const ReviewForm = () => {
-  // State to manage the list of reviews
-  const [reviews, setReviews] = useState([
-    { id: 1, doctorName: 'Dr. John Doe', doctorSpeciality: 'Cardiologist', feedback: '', rating: null, reviewGiven: false },
-    { id: 2, doctorName: 'Dr. Jane Smith', doctorSpeciality: 'Dermatologist', feedback: '', rating: null, reviewGiven: false },
-    { id: 3, doctorName: 'Dr. Mike Johnson', doctorSpeciality: 'Pediatrician', feedback: '', rating: null, reviewGiven: false }
-    // Add more initial data as needed
-  ]);
+    const [reviewData, setReviewData] = useState({});
+    const [isFeedbackSubmitted, setIsFeedbackSubmitted] = useState({});
 
-  // State to manage whether to show the feedback form popup
-  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
-  const [selectedDoctor, setSelectedDoctor] = useState(null); // Track which doctor's feedback is being given
+    const reportData = [
+        {
+            serialNumber: 1,
+            doctorName: 'Dr. Ramesh',
+            doctorSpeciality: 'Cardiology',
 
-  // Function to handle opening the feedback form popup
-  const openFeedbackForm = (id) => {
-    const doctor = reviews.find(review => review.id === id);
-    setSelectedDoctor(doctor);
-    setShowFeedbackForm(true);
-  };
+        },
+        {
+            serialNumber: 2,
+            doctorName: 'Dr. Harini',
+            doctorSpeciality: 'Dermatology',
 
-  // Function to handle closing the feedback form popup
-  const closeFeedbackForm = () => {
-    setShowFeedbackForm(false);
-    setSelectedDoctor(null);
-  };
+        },
+    ];
 
-  // Function to handle feedback submission
-  const handleFeedbackSubmit = (feedback, rating) => {
-    const updatedReviews = reviews.map(review => {
-      if (review.id === selectedDoctor.id) {
-        return { ...review, feedback, rating, reviewGiven: true };
-      }
-      return review;
-    });
-    setReviews(updatedReviews);
-    closeFeedbackForm(); // Close the feedback form after submission
-  };
+    const handleGiveReview = (serialNumber) => {
+        setReviewData((prevReviewData) => ({
+            ...prevReviewData,
+            [serialNumber]: ''
+        }));
+    };
 
-  return (
-    <div className="review-form">
-      <h3>Please share feedback about your doctors</h3>
-      <table className="review-table">
-        <thead>
-          <tr>
-            <th>Serial Number</th>
-            <th>Doctor Name</th>
-            <th>Doctor Specialty</th>
-            <th>Forms</th>
-            <th>Review Given</th>
-          </tr>
-        </thead>
-        <tbody>
-          {reviews.map(review => (
-            <tr key={review.id}>
-              <td>{review.id}</td>
-              <td>{review.doctorName}</td>
-              <td>{review.doctorSpeciality}</td>
-              <td>
-                {/* Replace input field with a button */}
-                {!review.reviewGiven ? (
-                  <button
-                    onClick={() => openFeedbackForm(review.id)}
-                    className="feedback-button"
-                  >
-                    Provide Feedback
-                  </button>
-                ) : (
-                  <span className="feedback-submitted">Feedback Submitted</span>
-                )}
-              </td>
-              <td>
-                {review.reviewGiven && (
-                  <div>
-                    <p>Rating: {review.rating}</p>
-                    <p>Review: {review.feedback}</p>
-                  </div>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    const handleReviewSubmit = (serialNumber, review) => {
+        setReviewData((prevReviewData) => ({
+            ...prevReviewData,
+            [serialNumber]: review
+        }));
+        setIsFeedbackSubmitted((prevSubmitted) => ({
+            ...prevSubmitted,
+            [serialNumber]: true
+        }));
+    };
 
-      {/* Conditional rendering of FeedbackForm popup */}
-      {showFeedbackForm && selectedDoctor && (
-        <div className="feedback-form-popup">
-          <FeedbackForm
-            doctor={selectedDoctor}
-            onClose={closeFeedbackForm}
-            onSubmit={handleFeedbackSubmit}
-          />
+    return (
+        <div style={{ marginTop: '10%' }} className="reviews-container">
+            <h1>Reviews</h1>
+            <table className="report-table">
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Doctor Name</th>
+                        <th>Doctor Specialty</th>
+                        <th>Provide Feedback</th>
+                        <th>Review Given</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {reportData.map((report) => (
+                        <tr key={report.serialNumber}>
+                            <td>{report.serialNumber}</td>
+                            <td>{report.doctorName}</td>
+                            <td>{report.doctorSpeciality}</td>
+                            <td>
+                                {!reviewData[report.serialNumber] ? (
+                                    <Popup
+                                        trigger={
+                                            <button
+                                                className="give-review-button"
+                                                onClick={() => handleGiveReview(report.serialNumber)}
+                                            >
+                                                Click Here
+                                            </button>
+                                        }
+                                        modal
+                                        nested
+                                    >
+                                        {(close) => (
+                                            <div className="modal">
+                                                <GiveReviews
+                                                    serialNumber={report.serialNumber}
+                                                    onReviewSubmit={handleReviewSubmit}
+                                                    review={reviewData[report.serialNumber]} // Pass the review data
+                                                />
+                                               <button className="close-modal-button" onClick={close}>
+                                                    Close
+                                                </button>
+                                            </div>
+                                        )}
+                                    </Popup>
+                                ) : (
+                                    <button className="give-review-button" disabled={isFeedbackSubmitted[report.serialNumber]}>
+                                        {isFeedbackSubmitted[report.serialNumber] ? 'Review Given' : 'Give Review'}
+                                    </button>
+                                )}
+                            </td>
+                            <td>
+                                {reviewData[report.serialNumber] && (
+                                    <div className="review-given">
+                                        <p>{reviewData[report.serialNumber]}</p>
+                                    </div>
+                                )}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default ReviewForm;

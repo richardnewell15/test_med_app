@@ -9,14 +9,14 @@ const DoctorCard = ({ name, speciality, experience, ratings, profilePic }) => {
   const [showAppointmentsForm, setShowAppointmentsForm] = useState(false);
 
   const handleBookNow = (formData) => {
-    console.log("Booking appointment with data:", formData); // Debugging line
+    // console.log("Booking appointment with data:", formData); // Debugging line
     setIsAppointmentBooked(true);
     setAppointment(formData);
     setShowAppointmentsForm(false); 
   };
 
   const handleCancelAppointment = () => {
-    console.log("Cancelling appointment."); // Debugging line
+    // console.log("Cancelling appointment."); // Debugging line
     setIsAppointmentBooked(false);
     setAppointment(null); 
   };
