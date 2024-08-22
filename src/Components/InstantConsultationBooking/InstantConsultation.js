@@ -60,7 +60,7 @@ const InstantConsultation = () => {
 
     return (
         <center>
-            <div  className="searchpage-container">
+            <div  className="searchpage-container"  style={{paddingTop:'100px'}}>
             <FindDoctorSearchIC onSearch={handleSearch} />
             <div className="search-results-container">
             {isSearched ? (
